@@ -18,7 +18,9 @@ namespace ControlSystem.WebApi.Device.Extensions
             services.AddSingleton<IIndicatorRepository, IndicatorRepository>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IDeviceService, DeviceService>();
+            services.AddSingleton<IIndicatorsService, IndicatorService>();
             services.AddSingleton<IAuthenticationManager, AuthenticatinManager>();
+            services.AddSingleton<IIndicatorValuesRepository, IndicatorValuesRepository>();
         }
     }
 }

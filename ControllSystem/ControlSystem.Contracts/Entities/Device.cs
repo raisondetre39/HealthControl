@@ -16,6 +16,6 @@ namespace ControlSystem.Contracts.Entities
         [Column("user_id")]
         public int UserId { get; set; }
 
-        public virtual ICollection<DeviceInicator> DeviceIndicators { get; set; }
+        public virtual List<DeviceInicator> DeviceIndicators { get; set; }
     }
 }

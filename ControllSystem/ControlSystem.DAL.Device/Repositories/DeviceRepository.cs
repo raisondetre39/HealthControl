@@ -1,4 +1,5 @@
-﻿using ControlSystem.Contracts.Enums;
+﻿using ControlSystem.Contracts.Entities;
+using ControlSystem.Contracts.Enums;
 using ControlSystem.Contracts.Responses;
 using ControlSystem.DAL.Device.Interfaces;
 using Microsoft.EntityFrameworkCore;

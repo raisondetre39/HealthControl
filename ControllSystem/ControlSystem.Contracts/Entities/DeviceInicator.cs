@@ -19,6 +19,6 @@ namespace ControlSystem.Contracts.Entities
         [Column("indicator_id")]
         public int IndicatorId { get; set; }
 
-        public virtual IEnumerable<IndicatorValue> IndicatorValues { get; set; }
+        public virtual IEnumerable<IndicatorValue> IndicatorValues { get; set; } = new List<IndicatorValue>();
     }
 }

@@ -8,7 +8,7 @@ namespace ControlSystem.BL.Disease.Interfaces
 {
     public interface IDiseaseService
     {
-        Task<IEnumerable<Contracts.Entities.Disease>> GetDiseases();
+        Task<GetDiseasesResult> GetDiseases();
 
         Task<CreateDiseaseResult> CreateDisease(Contracts.Entities.Disease disease);
 
