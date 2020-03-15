@@ -1,5 +1,7 @@
 ﻿using ControlSystem.Contracts.Entities;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
 namespace ControlSystem.DAL.Device.ControlSystemContext
 {

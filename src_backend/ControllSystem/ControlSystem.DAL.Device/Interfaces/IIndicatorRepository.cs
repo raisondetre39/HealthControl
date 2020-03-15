@@ -7,5 +7,7 @@ namespace ControlSystem.DAL.Device.Interfaces
     public interface IIndicatorRepository
     {
         Task<bool> IsIndicatorsExist(IEnumerable<int> indicators);
+
+        Task<IEnumerable<Indicator>> GetIndicators();
     }
 }

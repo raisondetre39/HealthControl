@@ -8,7 +8,7 @@ namespace ControlSystem.Contracts.Entities
     public class IndicatorValue : BaseEntity
     {
         [JsonIgnore]
-        public DeviceInicator DeviceInicator { get; set; }
+        public virtual DeviceInicator DeviceInicator { get; set; }
 
         [Column("device_indicator_id")]
         public int DeviceIndicatorId { get; set; }

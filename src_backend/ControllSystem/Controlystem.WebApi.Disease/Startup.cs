@@ -36,9 +36,9 @@ namespace Controlystem.WebApi.Disease
                 app.UseHsts();
             }
 
-            //app.UseCors(builder => builder.WithOrigins("https://localhost:44367")
-            //                              .AllowAnyHeader()
-            //                              .AllowAnyMethod());
+            app.UseCors(builder => builder.WithOrigins("https://localhost:44365")
+                                          .AllowAnyHeader()
+                                          .AllowAnyMethod());
             app.UseAuthentication();
             app.UseStaticFiles();
             app.UseSwaggerDocumentation();

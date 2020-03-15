@@ -3,6 +3,7 @@ using ControlSystem.Contracts.Responses;
 using ControlSystem.DAL.Disease.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -17,9 +18,14 @@ namespace ControlSystem.BL.Disease.Services
             _diseaseRepository = unitOfWork.DiseaseRepository;
         }
 
-        public async Task<IEnumerable<Contracts.Entities.Disease>> GetDiseases()
+        public async Task<GetDiseasesResult> GetDiseases()
         {
-            return await _diseaseRepository.GetAsync();
+            var result = await _diseaseRepository.GetAsync();
+            return new GetDiseasesResult()
+            {
+                Diseases = result,
+                Count = result.Count()
+            };
         }
 
         public async Task<CreateDiseaseResult> CreateDisease(Contracts.Entities.Disease disease)

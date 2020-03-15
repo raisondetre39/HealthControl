@@ -1,4 +1,5 @@
-﻿using ControlSystem.Contracts.Enums;
+﻿using ControlSystem.Contracts.Entities;
+using ControlSystem.Contracts.Enums;
 using ControlSystem.Contracts.Responses;
 using ControlSystem.DAL.Device.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -61,8 +62,14 @@ namespace ControlSystem.DAL.Device.Repositories
         {
             using (var context = new ControlSystemContext.ControlSystemContext())
             {
-                return await context.Devices.Include(device => device.DeviceIndicators)
+                var device =  await context.Devices.Include(item => item.DeviceIndicators)
                     .FirstOrDefaultAsync(expression);
+
+                device.DeviceIndicators
+                    .ForEach(ind => ind.IndicatorValues =  context.Set<IndicatorValue>()
+                        .Where(item => item.DeviceIndicatorId == ind.Id).ToList());
+
+                return device;
             }
         }
     }

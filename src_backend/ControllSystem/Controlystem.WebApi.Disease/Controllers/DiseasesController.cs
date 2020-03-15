@@ -22,7 +22,7 @@ namespace Controlystem.WebApi.Disease.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ControlSystem.Contracts.Entities.Disease>> Get()
+        public async Task<GetDiseasesResult> Get()
         {
             return await _diseaseService.GetDiseases();
         }
