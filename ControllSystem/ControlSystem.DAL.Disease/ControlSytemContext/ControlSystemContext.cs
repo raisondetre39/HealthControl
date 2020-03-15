@@ -5,8 +5,8 @@ namespace ControlSystem.DAL.Disease.ControlSystemContext
 {
     public class ControlSystemContext : DbContext
     {
-        //private readonly string CONNECTION = "Server=health-control.cmhkqigvllj1.us-east-1.rds.amazonaws.com;Database=health_control;Uid=admin;Pwd=mTq5KM8MDFCi4ZJvhAgu;";
-        private readonly string CONNECTION = "Server=localhost;Database=health_control;Uid=admin;Pwd=root;";
+        private readonly string CONNECTION = "Server=health-control.cmhkqigvllj1.us-east-1.rds.amazonaws.com;Database=health_control;Uid=admin;Pwd=mTq5KM8MDFCi4ZJvhAgu;";
+        //private readonly string CONNECTION = "Server=localhost;Database=health_control;Uid=admin;Pwd=root;";
 
         public DbSet<Contracts.Entities.Disease> Diseases { get; set; }
 

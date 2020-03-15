@@ -2,9 +2,6 @@
 using ControlSystem.Contracts.Enums;
 using ControlSystem.DAL.Device.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ControlSystem.DAL.Device.Repositories

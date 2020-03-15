@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using ControlSystem.DAL.Device;
 using ControlSystem.DAL.Device.Interfaces;
-using ControlSystem.DAL.Device.ControlSystemContext;
 using ControlSystem.BL.Device.Interfaces;
 using ControlSystem.BL.Device.Services;
 using ControlSystem.DAL.Device.Repositories;

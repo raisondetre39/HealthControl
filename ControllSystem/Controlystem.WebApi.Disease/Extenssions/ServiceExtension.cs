@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using ControlSystem.DAL.Disease;
 using ControlSystem.DAL.Disease.Interfaces;
-using ControlSystem.DAL.Disease.ControlSystemContext;
 using ControlSystem.BL.Disease.Interfaces;
 using ControlSystem.BL.Disease.Services;
 using ControlSystem.DAL.Disease.Repositories;

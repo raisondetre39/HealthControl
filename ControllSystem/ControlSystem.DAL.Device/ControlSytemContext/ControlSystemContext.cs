@@ -1,14 +1,12 @@
 ﻿using ControlSystem.Contracts.Entities;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
 
 namespace ControlSystem.DAL.Device.ControlSystemContext
 {
     public class ControlSystemContext : DbContext
     {
-        //private readonly string CONNECTION = "Server=health-control.cmhkqigvllj1.us-east-1.rds.amazonaws.com;Database=health_control;Uid=admin;Pwd=mTq5KM8MDFCi4ZJvhAgu;";
-        private readonly string CONNECTION = "Server=localhost;Database=health_control;Uid=admin;Pwd=root;";
+        private readonly string CONNECTION = "Server=health-control.cmhkqigvllj1.us-east-1.rds.amazonaws.com;Database=health_control;Uid=admin;Pwd=mTq5KM8MDFCi4ZJvhAgu;";
+        //private readonly string CONNECTION = "Server=localhost;Database=health_control;Uid=admin;Pwd=root;";
 
         public DbSet<Contracts.Entities.Device> Devices { get; set; }
         public DbSet<Indicator> Indicators { get; set; }

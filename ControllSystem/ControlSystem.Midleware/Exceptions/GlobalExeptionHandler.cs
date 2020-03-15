@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Net;
-using System.Security;
 using System.Threading.Tasks;
-using System.Web;
-using System.Web.Http.ExceptionHandling;
 
 namespace ControlSystem.Middleware.Exceptions
 {

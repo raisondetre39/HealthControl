@@ -1,7 +1,5 @@
 ﻿using ControlSystem.Contracts.Entities;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace ControlSystem.Contracts.Responses
 {

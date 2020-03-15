@@ -1,10 +1,7 @@
 ﻿using ControlSystem.BL.Device.Interfaces;
 using ControlSystem.Contracts.Responses;
 using ControlSystem.DAL.Device.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ControlSystem.BL.Device.Services

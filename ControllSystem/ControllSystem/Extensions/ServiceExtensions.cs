@@ -1,7 +1,6 @@
 ﻿using ControlSystem.BL.Auth.Interfaces;
 using ControlSystem.BL.Auth.Services;
 using ControlSystem.DAL;
-using ControlSystem.DAL.ControlSystemContext;
 using ControlSystem.DAL.Interfaces;
 using ControlSystem.DAL.Repositories;
 using ControlSystem.Middleware.Auth;

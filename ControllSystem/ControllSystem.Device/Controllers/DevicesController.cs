@@ -1,10 +1,8 @@
-﻿using Amazon.ElasticFileSystem.Model;
-using AutoMapper;
+﻿using AutoMapper;
 using ControlSystem.BL.Device.Interfaces;
 using ControlSystem.Contracts.Entities;
 using ControlSystem.Contracts.Enums;
 using ControlSystem.Contracts.Requests;
-using ControlSystem.Contracts.Responses;
 using ControlSystem.WebApi.Device.Infrastructure.Validation;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;

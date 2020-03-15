@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Amazon.ElasticFileSystem.Model;
+﻿using System.Threading.Tasks;
 using ControlSystem.BL.Disease.Interfaces;
 using ControlSystem.Contracts.Enums;
 using ControlSystem.Contracts.Responses;
