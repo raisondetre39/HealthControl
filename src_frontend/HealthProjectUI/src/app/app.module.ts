@@ -7,9 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { JwtInterceptor } from './shared/interceptor/interceptor';
-import { APIInterceptor } from './shared/interceptor/interceptorApi';
+import { JwtInterceptor } from './shared/interceptor/jwt.interceptor';
+import { ErrorInterceptor } from './shared/interceptor/error.interceptor';
 import { HealthProjectComponent } from './health-project/health-project.component';
+import { AuthenticationService } from './health-project/features/authentication/authentication.service';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { HealthProjectComponent } from './health-project/health-project.componen
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: APIInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

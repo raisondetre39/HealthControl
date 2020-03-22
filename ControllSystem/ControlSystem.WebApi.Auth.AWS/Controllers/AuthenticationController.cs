@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security;
 using System.Threading.Tasks;
 
+
 namespace ControlSystem.WebApi.Auth.AWS.Controllers
 {
     [Route("api/[controller]")]
@@ -36,7 +37,7 @@ namespace ControlSystem.WebApi.Auth.AWS.Controllers
             if (result.Status != AuthenticationStatus.Success)
                 throw new SecurityException("Access denied");
 
-            return Ok(result.Token);
+            return Ok(result);
         }
 
         /// <summary>

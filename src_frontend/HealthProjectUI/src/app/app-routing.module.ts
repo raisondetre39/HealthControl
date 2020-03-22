@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HealthProjectComponent } from './health-project/health-project.component';
+import { AuthGuard } from './health-project/guards/auth.guard';
+import { Role } from './shared/extension/roles';
 
 
 const routes: Routes = [
@@ -9,9 +11,21 @@ const routes: Routes = [
     component: HealthProjectComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
+      },
+      {
+        path: 'home',
+        loadChildren: () =>
+          import('./health-project/features/home/home.module').then(m => m.HomeModule)
+      },
+      {
         path: 'admin',
         loadChildren: () =>
           import('./health-project/features/admin/admin.module').then(m => m.AdminModule),
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin] }
       },
       {
         path: 'login',

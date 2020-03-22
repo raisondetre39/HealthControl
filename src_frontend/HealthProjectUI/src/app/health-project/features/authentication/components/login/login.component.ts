@@ -2,10 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../../authentication.service';
-import { first, map, takeUntil } from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+
 
 @Component({
   selector: 'app-login',
@@ -27,65 +27,44 @@ export class LoginComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private authenticationService: AuthenticationService,
-    private toastr: ToastrService,
-
-
   ) {
-    if (localStorage.getItem('currentUser')) {
-      localStorage.getItem('currentUser');
+    if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
+    this.generateForm();
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
+  }
+
+  generateForm() {
     this.loginForm = this.formBuilder.group(
       {
-        username: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
         password: ['', Validators.required]
       }
     );
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
-
   }
   get fields() { return this.loginForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-    if (this.loginForm.invalid) {
-      return;
-    }
+    if (this.loginForm.valid) {
     this.loading = true;
     this.authenticationService.login(this.loginForm)
-      .pipe(map(user => {
-        if (user && user.token) {
-          localStorage.setItem('currentUser', JSON.stringify(user));
-
-          this.authenticationService.currentUserSubject.next(user);
-
-        }
-      }), takeUntil(this.destroy$))
-      .subscribe(
-        data => {
-          this.loading = false;
-          console.log(this.returnUrl);
-          this.router.navigate(['pass-test/select-test']);
+    .pipe(first())
+    .subscribe(
+        () => {
+          this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.error = error;
-          console.log(error + 'AQAAAAAAAAAAAAAAAAAAAAAA');
-          this.loading = false;
-
-        }
-      );
-
-  }
-
-  login() {
-    this.authenticationService.login(this.loginForm).subscribe(next => {
-      this.toastr.success('Logged in succesfully');
-    }, error => {
-      this.toastr.error(error);
-    });
+            this.error = error;
+            this.loading = false;
+        });
+    } else {
+        this.loginForm.markAllAsTouched();
+    }
   }
 
   loggedIn() {
@@ -93,12 +72,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
-  hasCustomError(form: FormGroup, control: string): boolean {
-    return (
-      form.get(`${control}`).invalid &&
-      (form.get(`${control}`).dirty || form.get(`${control}`).touched)
-    );
-  }
+
+  hasCustomError = (form: FormGroup, control: string): boolean =>
+    form.get(`${control}`).invalid && (form.get(`${control}`).dirty || form.get(`${control}`).touched)
+
+  hasPatternError = (form: FormGroup, control: string): boolean =>
+    (form.get(`${control}`).invalid && form.get(`${control}`).dirty)
 
   ngOnDestroy(): void {
     this.destroy$.next();

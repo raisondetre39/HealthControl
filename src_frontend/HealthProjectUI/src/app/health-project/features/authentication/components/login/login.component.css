@@ -1,0 +1,22 @@
+.mat-form-field {
+    width: 100%;
+}
+
+/*
+.bg-blue-color {
+    color: white;
+    background-color: #232E42;
+}
+
+::ng-deep input.mat-input-element {
+    color: white !important;
+  }
+  
+  ::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: white !important;
+  }
+  
+  ::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+    background-color: white !important;
+  }
+*/
