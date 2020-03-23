@@ -1,0 +1,82 @@
+<div class="row offset-md-3 mt-5 pt-3">
+    <div class="col-md-7 ml-1">
+        <form [formGroup]="userForm" autocomplete="off" novalidate (ngSubmit)="onSubmit()">
+            <div class="form-group pt-2">
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email"
+                    [class.is-invalid]="hasCustomError(userForm, 'email')" />
+                    <mat-error *ngIf="hasPatternError(userForm, 'email')">
+                        Invalid email address. Valid e-mail can contain only latin letters, numbers, '@' and '.'.
+                    </mat-error>
+                    <mat-error *ngIf="hasCustomError(userForm, 'email')">
+                        Email is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-group pt-2">
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" formControlName="password"
+                    [class.is-invalid]="hasCustomError(userForm, 'password')" />
+                    <mat-error *ngIf="hasCustomError(userForm, 'password')">
+                        Password is required.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="row pt-2">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>First Name</mat-label>
+                            <input matInput formControlName="firstName"
+                            [class.is-invalid]="hasCustomError(userForm, 'firstName')" />
+                            <mat-error *ngIf="hasCustomError(userForm, 'firstName')">
+                                First Name is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>Last Name</mat-label>
+                            <input matInput formControlName="lastName"
+                            [class.is-invalid]="hasCustomError(userForm, 'lastName')" />
+                            <mat-error *ngIf="hasCustomError(userForm, 'lastName')">
+                                Last Name is requireds.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group pt-2">
+                <mat-form-field>
+                    <mat-label>Disease</mat-label>
+                    <mat-select formControlName="diseaseId">
+                        <mat-option [value]='null'>Select disease</mat-option>
+                        <ng-container *ngIf="disease!=null">
+                        <mat-option *ngFor="let element of disease.diseases" 
+                        [value]="element.id">
+                            {{element.diseaseName}}
+                        </mat-option>
+                        </ng-container>
+                    </mat-select>
+                    <mat-error *ngIf="hasCustomError(userForm, 'diseaseId')">
+                        Please choose disease.
+                    </mat-error>
+                    </mat-form-field>
+            </div>
+            <div class="form-group pt-2">
+                <mat-button-toggle-group>
+                    <button mat-raised-button color="primary" class="btn-block" type="submit">
+                        Create
+                    </button>
+                    <mat-button-toggle (click)="resetForm()">
+                        <mat-icon>cached</mat-icon>
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+        </form>
+    </div>
+</div>

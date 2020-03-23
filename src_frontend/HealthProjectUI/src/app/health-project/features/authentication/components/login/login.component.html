@@ -1,47 +1,36 @@
-<div class="row"> 
-    <div class="col-md-7">
 
-    </div>
-    <div class="col-md-5 mh-100 bg-blue-color">
-        <div class="mt-5">
-            <h4 class="text-center">Sign in</h4>
-            <div class="card-body">
-                <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-                    <div class="form-group">
-                        <mat-form-field>
-                            <mat-label>Email</mat-label>
-                            <input matInput formControlName="email"
-                            [class.is-invalid]="hasCustomError(loginForm, 'email')" />
-                        </mat-form-field>
-                        <div class="alert alert-danger" *ngIf="hasCustomError(loginForm, 'email')">
-                            <span>
-                                Email is required.
-                            </span>
-                        </div>
-                        <div class="alert alert-danger" *ngIf="hasPatternError(loginForm, 'email')">
-                            <span>
-                                Invalid email address. Valid e-mail can contain only latin letters, numbers, '@' and '.'
-                            </span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <mat-form-field>
-                            <mat-label>Password</mat-label>
-                            <input matInput type="password" formControlName="password"
-                            [class.is-invalid]="hasCustomError(loginForm, 'password')" />
-                        </mat-form-field>
-                        <div class="alert alert-danger" *ngIf="hasCustomError(loginForm, 'password')">
-                            <span>
-                                Password is required
-                            </span>
-                        </div>
-                    </div>
-                    <button [disabled]="loading" class="btn btn-primary btn-block">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                        SIGN IN
-                    </button>
-                </form>
+    <div class="col-md-5 offset-md-3 mt-5 bg-blue-color">
+            <div class="form-group text-center">
+                <img src="\assets\images\icon-account.png" class="img-fluid" alt="Responsive image">
             </div>
+            <h4 class="text-center">Sign in</h4>
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <div class="form-group pt-3">
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="email"
+                        [class.is-invalid]="hasCustomError(loginForm, 'email')" />
+                        <mat-error *ngIf="hasPatternError(loginForm, 'email')">
+                            Invalid email address. Valid e-mail can contain only latin letters, numbers, '@' and '.'.
+                        </mat-error>
+                        <mat-error *ngIf="hasCustomError(loginForm, 'email')">
+                            Email is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="form-group pt-3">
+                    <mat-form-field>
+                        <mat-label>Password</mat-label>
+                        <input matInput type="password" formControlName="password"
+                        [class.is-invalid]="hasCustomError(loginForm, 'password')" />
+                        <mat-error *ngIf="hasCustomError(loginForm, 'password')">
+                            Password is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <button [disabled]="loading" class="btn btn-primary btn-block">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    SIGN IN
+                </button>
+            </form>
         </div>
-    </div>
-</div>

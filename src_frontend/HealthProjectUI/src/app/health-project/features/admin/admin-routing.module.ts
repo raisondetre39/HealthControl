@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
+import { CreateDeviceComponent } from './components/create-device/create-device.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'admin-page', pathMatch: 'full'},
-  { path: 'admin-page', component: AdminPageComponent},
+  { path: '', redirectTo: 'create-user', pathMatch: 'full'},
+  { path: 'create-user', component: CreateUserComponent},
+  { path: 'create-device/:id', component: CreateDeviceComponent},
 ];
 
 @NgModule({
