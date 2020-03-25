@@ -14,6 +14,9 @@ import { LoginComponent } from './components/login/login.component';
     AuthenticationRoutingModule,
     SharedModule,
   ],
+  exports: [
+    LoginComponent
+  ],
   providers: [
   ]
 })

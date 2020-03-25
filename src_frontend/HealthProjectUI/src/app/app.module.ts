@@ -10,7 +10,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor } from './shared/interceptor/jwt.interceptor';
 import { ErrorInterceptor } from './shared/interceptor/error.interceptor';
 import { HealthProjectComponent } from './health-project/health-project.component';
-import { AuthenticationService } from './health-project/features/authentication/authentication.service';
+import { LoginComponent } from './health-project/features/authentication/components/login/login.component';
 
 @NgModule({
   declarations: [

@@ -7,10 +7,10 @@
       <mat-nav-list>
         <a mat-list-item [routerLink]="['/home']" routerLinkActive="active">Home</a>
         <a mat-list-item [routerLink]="['/admin']" routerLinkActive="active" *ngIf="isAdmin">Create User</a>
-        <a mat-list-item class="bottomStick" (click)="logout()" *ngIf="userAuthenticated()">
+        <button mat-raised-button color="warn" class="bottomStick btn btn-block" (click)="logout()" *ngIf="userAuthenticated()">
           Logout
           <mat-icon>exit_to_app</mat-icon>
-        </a>
+        </button>
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>

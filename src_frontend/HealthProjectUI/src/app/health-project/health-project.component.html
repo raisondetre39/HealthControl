@@ -1,7 +1,12 @@
-<app-header>
-    <div class="px-5">
-      <router-outlet></router-outlet>
-    </div>
-</app-header>
+<div *ngIf="userAuthenticated()">
+  <app-header>
+      <div class="px-5">
+      </div>
+  </app-header>
+</div>
+<div *ngIf="!userAuthenticated()">
+  <router-outlet></router-outlet>
+</div>
+
   
   
