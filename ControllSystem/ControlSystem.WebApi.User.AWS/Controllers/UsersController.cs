@@ -5,6 +5,7 @@ using ControlSystem.Contracts.Models;
 using ControlSystem.WebApi.User.AWS.Infrastructure.Security;
 using ControlSystem.WebApi.User.AWS.Infrastructure.Validation;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ControlSystem.WebApi.User.AWS.Controllers
@@ -72,6 +73,26 @@ namespace ControlSystem.WebApi.User.AWS.Controllers
                 return NotFound($"User with id: {id} not found");
 
             return Ok(user);
+        }
+
+        [UserAuthorization]
+        [HttpGet]
+        public async Task<IEnumerable<Contracts.Entities.User>> GetUsers(int id)
+        {
+            return await _userService.GetUsers();
+        }
+
+        [UserAuthorization]
+        [HttpDelete("{id}")]
+        [ValidateModelState]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            if (id <= default(int))
+                return BadRequest("Id should be more then 0");
+
+            await _userService.DeleteUser(id);
+            
+            return Ok();
         }
     }
 }

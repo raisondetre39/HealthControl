@@ -5,6 +5,7 @@ using ControlSystem.Contracts.Responses;
 using ControlSystem.DAL.User.Interfaces;
 using ControlSystem.Middleware.Auth;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -46,6 +47,16 @@ namespace ControlSystem.BL.User.Services
         public async Task<UpdateUserStatus> UpdateUser(Contracts.Entities.User user)
         {
             return await _userRepository.UpdateAsync(user);
+        }
+
+        public async Task<IEnumerable<Contracts.Entities.User>> GetUsers()
+        {
+            return await _userRepository.GetAsync(); 
+        }
+
+        public async Task DeleteUser(int id)
+        {
+            await _userRepository.DeleteAsync(id);
         }
     }
 }

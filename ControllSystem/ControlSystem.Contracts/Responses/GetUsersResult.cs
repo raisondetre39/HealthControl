@@ -1,12 +1,14 @@
 ﻿using ControlSystem.Contracts.Entities;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace ControlSystem.Contracts.Responses
 {
-    public class GetDiseasesResult
+    public class GetUsersResult
     {
-        public IEnumerable<Disease> Diseases { get; set; }
+        public IEnumerable<User> Users { get; set; }
 
         [JsonIgnore]
         public int Count { get; set; }

@@ -27,7 +27,6 @@ namespace ControlSystem.WebApi.Auth.AWS.Controllers
         [HttpPost]
         public async Task<IActionResult> Authenticate([FromBody] AuthModel authModel)
         {
-            LambdaLogger.Log("Start request");
             var result = await _authenticationService.GenerateToken(authModel);
 
             if (result.Status == AuthenticationStatus.UserNotFound)
@@ -36,7 +35,7 @@ namespace ControlSystem.WebApi.Auth.AWS.Controllers
             if (result.Status != AuthenticationStatus.Success)
                 throw new SecurityException("Access denied");
 
-            return Ok(result.Token);
+            return Ok(result);
         }
 
         /// <summary>

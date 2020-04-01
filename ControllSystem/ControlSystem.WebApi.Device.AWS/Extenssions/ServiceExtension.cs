@@ -20,6 +20,7 @@ namespace ControlSystem.WebApi.Device.AWS.Extensions
             services.AddSingleton<IIndicatorsService, IndicatorService>();
             services.AddSingleton<IAuthenticationManager, AuthenticatinManager>();
             services.AddSingleton<IIndicatorValuesRepository, IndicatorValuesRepository>();
+            services.AddSingleton<IIndicatorValuesService, IndicatorValueService>();
         }
     }
 }

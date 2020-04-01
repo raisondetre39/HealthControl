@@ -25,7 +25,6 @@ namespace ControlSystem.Contracts.Entities
         [Column("device_id")]
         public int? DeviceId { get; set; }
 
-        [JsonIgnore]
         public virtual Disease Disease { get; set; }
 
         [Column("disease_id")]

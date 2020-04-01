@@ -3,6 +3,7 @@ using ControlSystem.Contracts.Responses;
 using ControlSystem.DAL.User.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -78,6 +79,26 @@ namespace ControlSystem.DAL.User.Repositories
                     return user.Id == id;
 
                 return user == null;
+            }
+        }
+
+        public async Task<IEnumerable<Contracts.Entities.User>> GetAsync()
+        {
+            using (var context = new ControlSystemContext.ControlSystemContext())
+            {
+                return await context.Users
+                    .ToListAsync();
+            }
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            using (var context = new ControlSystemContext.ControlSystemContext())
+            {
+                var user = await context.Users.FirstOrDefaultAsync(item => item.Id == id);
+
+                if (user != null)
+                    context.Users.Remove(user);
             }
         }
     }

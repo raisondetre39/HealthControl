@@ -27,10 +27,10 @@ namespace ControlSystem.WebApi.User.AWS
             // Add S3 to the ASP.NET Core dependency injection framework.
             services.AddAWSService<Amazon.S3.IAmazonS3>();
 
-            services.AddCors();
             services.AddOptions();
             services.AddServices();
             services.AddMappings();
+            services.AddCors();
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Latest);
             services.AddSwaggerDocumentation();
@@ -49,14 +49,13 @@ namespace ControlSystem.WebApi.User.AWS
             }
 
             app.UseHttpsRedirection();
-            app.UseMvc();
-            app.UseCors(builder => builder.WithOrigins("https://localhost:4200")
-                              .AllowAnyHeader()
-                              .AllowAnyMethod());
             app.UseAuthentication();
             app.UseMiddleware<GlobalExeptionHandler>();
             app.UseStaticFiles();
-            app.UseSwaggerDocumentation();
+            app.UseSwaggerDocumentation(); 
+            app.UseCors(builder => builder.WithOrigins("https://localhost:4200")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod());
             app.UseMvc();
         }
     }
