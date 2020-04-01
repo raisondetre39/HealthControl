@@ -10,7 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     .pipe(first())
     .subscribe(
         () => {
-          this.router.navigate([this.returnUrl]);
+          this.router.navigate(['/home']);
         },
         error => {
             this.error = error;

@@ -6,11 +6,11 @@ export interface IUser {
 }
 
 export interface ICreateUser {
-    Email: string;
-    Password: string;
-    FirstName: string;
-    LastName: string;
-    DiseaseId: number;
+    email: string;
+    password: string;
+    firstName: string;
+    lastName: string;
+    diseaseId: number;
 }
 
 export interface IUserPartialInfo {

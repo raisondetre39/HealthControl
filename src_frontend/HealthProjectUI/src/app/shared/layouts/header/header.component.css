@@ -21,10 +21,25 @@
   }
   
   .mat-nav-list a.active {
-    background: #3F51B5;
-    color: white;
+    color: #1F8EFA !important;
+    background: #2A364C;
   }
 
   .bottomStick{
     position:absolute; bottom:0
   }
+
+  .bg-div {
+    box-shadow: 0px 6px 13px rgba(21, 33, 56, 0.533345);
+    background-color: #2F3B52 !important;
+  }
+
+  .text-deactive {
+    color: #98A7B9 !important;
+    font-family: Roboto;
+  }
+  .text-white {
+    color: white !important;
+    font-family: Roboto;
+  }
+  

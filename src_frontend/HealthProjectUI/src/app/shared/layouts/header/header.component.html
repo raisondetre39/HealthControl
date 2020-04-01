@@ -1,36 +1,36 @@
 <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav #drawer class="sidenav" fixedInViewport
-        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-        [mode]="(isHandset$ | async) ? 'over' : 'side'"
-        [opened]="(isHandset$ | async) === false">
-      <mat-toolbar>Menu</mat-toolbar>
-      <mat-nav-list>
-        <a mat-list-item [routerLink]="['/home']" routerLinkActive="active">Home</a>
-        <a mat-list-item [routerLink]="['/admin']" routerLinkActive="active" *ngIf="isAdmin">Create User</a>
-        <button mat-raised-button color="warn" class="bottomStick btn btn-block" (click)="logout()" *ngIf="userAuthenticated()">
-          Logout
-          <mat-icon>exit_to_app</mat-icon>
-        </button>
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
-      <mat-toolbar color="primary">
-        <mat-toolbar-row>
-          <button
-          type="button"
-          aria-label="Toggle sidenav"
-          mat-icon-button
-          (click)="drawer.toggle()"
-          *ngIf="isHandset$ | async">
-          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-        </button>
-          <span class="font-weight-bold">Health</span>
-          <span>Control</span>
-          <span class="example-spacer"></span>
-          <button mat-raised-button [routerLink]="['/login']" *ngIf="!userAuthenticated()">Sign In</button>
-        </mat-toolbar-row>
-      </mat-toolbar>
-      <ng-content></ng-content>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
+  <mat-sidenav #drawer class="sidenav bg-div" fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="text-white">          
+      <span class="font-weight-bold">Health</span>
+      <span>Control</span>
+    </mat-toolbar>
+    <mat-nav-list>
+      <a class="text-deactive" mat-list-item [routerLink]="['/home']" routerLinkActive="active">Home</a>
+      <a class="text-deactive" mat-list-item [routerLink]="['/admin']" routerLinkActive="active" *ngIf="isAdmin">Create User</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="bg-div">
+      <mat-toolbar-row>
+        <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+        <span class="example-spacer"></span>
+      <button mat-raised-button (click)="logout()" *ngIf="userAuthenticated()">
+        Logout
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
   

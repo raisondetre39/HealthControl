@@ -14,7 +14,7 @@ export class CreateUserService {
   constructor(private http: HttpClient) { }
 
   createUser(data): Observable<ICreateUser> {
-    return this.http.post<ICreateUser>(this.userApi + `Users/`, data);
+    return this.http.post<ICreateUser>(this.userApi + `Users`, data);
   }
 
   getDisease(): Observable<IDiseaseInfo> {

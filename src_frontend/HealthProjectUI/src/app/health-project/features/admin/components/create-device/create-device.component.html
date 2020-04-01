@@ -1,88 +1,90 @@
-<div class="row offset-md-3 mt-5 pt-3">
-    <div class="col-md-6">
-        <form [formGroup]="deviceForm" autocomplete="off" novalidate (ngSubmit)="onSubmit()">
-            <div class="form-group pt-2">
-                <mat-form-field>
-                    <mat-label>Device Name</mat-label>
-                    <input matInput formControlName="deviceName"
-                    [class.is-invalid]="hasCustomError(deviceForm, 'deviceName')" />
-                    <mat-error *ngIf="hasCustomError(deviceForm, 'deviceName')">
-                        Device Name is required.
-                    </mat-error>
-                    <mat-error *ngIf="hasPatternError(deviceForm, 'deviceName')">
-                        Device name can't contain less than 5 symbols
-                    </mat-error>
-                    <mat-error *ngIf="hasPatternError(deviceForm, 'deviceName')">
-                        Device name can't contain more than 10 symbols.
-                    </mat-error>
-                </mat-form-field>
-            </div>
-            <div class="form-group pt-2">
-                <mat-form-field>
-                    <mat-label>Indicators</mat-label>
-                    <mat-select formControlName="indicatorIds" multiple>
-                        <ng-container *ngIf="indicator!=null">
-                        <mat-option *ngFor="let element of indicator.indicators" 
-                        [value]="element.id">
-                            {{element.indicatorName}}
-                        </mat-option>
-                        </ng-container>
-                    </mat-select>
-                    <mat-error *ngIf="hasCustomError(deviceForm, 'indicatorIds')">
-                        Please choose indicators.
-                    </mat-error>
+<div class="bg-div container">
+    <div class="row pt-5">
+        <div class="col-md-6">
+            <form [formGroup]="deviceForm" autocomplete="off" novalidate (ngSubmit)="onSubmit()">
+                <div class="form-group pt-2">
+                    <mat-form-field>
+                        <mat-label>Device Name</mat-label>
+                        <input matInput formControlName="deviceName"
+                        [class.is-invalid]="hasCustomError(deviceForm, 'deviceName')" />
+                        <mat-error *ngIf="hasCustomError(deviceForm, 'deviceName')">
+                            Device Name is required.
+                        </mat-error>
+                        <mat-error *ngIf="hasPatternError(deviceForm, 'deviceName')">
+                            Device name can't contain less than 5 symbols
+                        </mat-error>
+                        <mat-error *ngIf="hasPatternError(deviceForm, 'deviceName')">
+                            Device name can't contain more than 10 symbols.
+                        </mat-error>
                     </mat-form-field>
-            </div>
-            <div class="form-group pt-2">
-                <mat-button-toggle-group>
-                    <button mat-raised-button color="primary" class="btn-block" type="submit">
-                        Create
-                    </button>
-                    <mat-button-toggle (click)="resetForm()">
-                        <mat-icon>cached</mat-icon>
-                    </mat-button-toggle>
-                </mat-button-toggle-group>
-            </div>
-        </form>
-    </div>
-    <div class="col-md-6">
-        <ng-container *ngIf="userInfo!=null">
+                </div>
+                <div class="form-group pt-2">
+                    <mat-form-field>
+                        <mat-label>Indicators</mat-label>
+                        <mat-select formControlName="indicatorIds" multiple>
+                            <ng-container *ngIf="indicator!=null">
+                            <mat-option *ngFor="let element of indicator.indicators" 
+                            [value]="element.id">
+                                {{element.indicatorName}}
+                            </mat-option>
+                            </ng-container>
+                        </mat-select>
+                        <mat-error *ngIf="hasCustomError(deviceForm, 'indicatorIds')">
+                            Please choose indicators.
+                        </mat-error>
+                        </mat-form-field>
+                </div>
+                <div class="form-group pt-2">
+                    <mat-button-toggle-group>
+                        <button mat-raised-button color="primary" class="btn-block" type="submit">
+                            Create
+                        </button>
+                        <mat-button-toggle (click)="resetForm()">
+                            <mat-icon>cached</mat-icon>
+                        </mat-button-toggle>
+                    </mat-button-toggle-group>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <ng-container *ngIf="userInfo!=null">
+                <div class="row pt-2">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label>Email</mat-label>
+                                <input matInput [value]="userInfo.email" readonly/>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <mat-form-field>
+                                <mat-label>Disease</mat-label>
+                                <input matInput [value]="userInfo?.diseaseName" readonly/>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
             <div class="row pt-2">
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Email</mat-label>
-                            <input matInput [value]="userInfo.email" readonly/>
+                            <mat-label>First Name</mat-label>
+                            <input matInput [value]="userInfo.firstName" readonly/>
                         </mat-form-field>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Disease</mat-label>
-                            <input matInput [value]="userInfo?.diseaseName" readonly/>
+                            <mat-label>Last Name</mat-label>
+                            <input matInput [value]="userInfo.lastName" readonly/>
                         </mat-form-field>
                     </div>
                 </div>
             </div>
-        <div class="row pt-2">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <mat-form-field>
-                        <mat-label>First Name</mat-label>
-                        <input matInput [value]="userInfo.firstName" readonly/>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <mat-form-field>
-                        <mat-label>Last Name</mat-label>
-                        <input matInput [value]="userInfo.lastName" readonly/>
-                    </mat-form-field>
-                </div>
-            </div>
+            </ng-container>
         </div>
-        </ng-container>
     </div>
 </div>

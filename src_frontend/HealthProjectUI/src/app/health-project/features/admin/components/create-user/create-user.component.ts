@@ -42,6 +42,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   onSubmit(): void {
     if (this.userForm.valid) {
+      console.log(this.userForm.value);
       this.createUserService.createUser(this.userForm.value)
         .pipe(takeUntil(this.destroy$))
         .subscribe(
@@ -80,7 +81,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     form.get(`${control}`).invalid && (form.get(`${control}`).dirty || form.get(`${control}`).touched)
 
   hasPatternError = (form: FormGroup, control: string): boolean =>
-    (form.get(`${control}`).invalid &&  form.get(`${control}`).dirty)
+    (form.get(`${control}`).invalid && form.get(`${control}`).dirty)
 
   ngOnDestroy(): void {
     this.destroy$.next();

@@ -28,16 +28,16 @@ const routes: Routes = [
         data: { roles: [Role.Admin] }
       },
       {
-        path: 'login',
-        loadChildren: () =>
-          import('./health-project/features/authentication/authentication.module').then(m => m.AuthenticationModule)
-      },
-      {
         path: 'user',
         loadChildren: () =>
           import('./health-project/features/user/user.module').then(m => m.UserModule)
       },
     ]
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./health-project/features/authentication/authentication.module').then(m => m.AuthenticationModule)
   },
 ];
 

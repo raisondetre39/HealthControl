@@ -60,7 +60,6 @@ export class CreateDeviceComponent implements OnInit, OnDestroy {
     );
   }
 
-
   getIndicators(): void {
     this.createDeviceService.getIndicators()
     .pipe(takeUntil(this.destroy$))

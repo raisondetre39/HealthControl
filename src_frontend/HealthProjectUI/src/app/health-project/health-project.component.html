@@ -1,12 +1,7 @@
 <div *ngIf="userAuthenticated()">
   <app-header>
-      <div class="px-5">
-      </div>
+      <router-outlet></router-outlet>
   </app-header>
 </div>
-<div *ngIf="!userAuthenticated()">
-  <router-outlet></router-outlet>
-</div>
-
   
   
