@@ -48,18 +48,14 @@ namespace ControlSystem.WebApi.Disease.AWS
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
             app.UseAuthentication();
+            app.UseMiddleware<GlobalExeptionHandler>();
             app.UseStaticFiles();
             app.UseSwaggerDocumentation();
-            //loggerFactory.AddNLog();
-            //app.AddNLogWeb();
-            //env.ConfigureNLog("NLog.config");
-            app.UseMiddleware<GlobalExeptionHandler>();
-            app.UseHttpsRedirection();
-            app.UseCors(options =>
-                options.WithOrigins("http://localhost:4200")
-                    .AllowAnyHeader()
-                    .AllowAnyMethod());
+            app.UseCors(builder => builder.WithOrigins("https://localhost:4200")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod());
             app.UseMvc();
         }
     }

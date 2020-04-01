@@ -1,4 +1,5 @@
 ﻿using ControlSystem.Contracts.Entities;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 
 namespace ControlSystem.Contracts.Responses
@@ -7,6 +8,7 @@ namespace ControlSystem.Contracts.Responses
     {
         public IEnumerable<Indicator> Indicators { get; set; }
 
+        [JsonIgnore]
         public int Count { get; set; }
     }
 }

@@ -37,7 +37,8 @@ namespace ControlSystem.BL.Auth.Services
             {
                 Status = _authenticationManager.GenerateToken(user, out string token),
                 Token = token,
-                Role = user.Role 
+                Role = user.Role,
+                Id = user.Id
             };
         }
 
