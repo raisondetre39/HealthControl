@@ -48,7 +48,8 @@ namespace ControlSystem.DAL.Device.Repositories
                     return new CreateDeviceResult() { Status = CreateDeviceStatus.IndicatorNotExists };
 
                 await context.AddAsync(entity);
-                
+
+                user.DeviceId = entity.Id;
                 context.Update(user);
                 await context.SaveChangesAsync();
 
