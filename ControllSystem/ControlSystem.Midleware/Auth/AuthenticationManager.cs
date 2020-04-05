@@ -118,7 +118,7 @@ namespace ControlSystem.Middleware.Auth
                 IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
 
                 token = encoder.Encode(payload, _jwtSettings.SignatureSecret);
-    }
+             }
             else
             {
                 result = AuthenticationStatus.ClientDisabled;

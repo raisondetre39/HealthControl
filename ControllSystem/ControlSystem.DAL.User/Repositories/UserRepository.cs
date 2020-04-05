@@ -4,6 +4,7 @@ using ControlSystem.DAL.User.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
@@ -87,6 +88,7 @@ namespace ControlSystem.DAL.User.Repositories
             using (var context = new ControlSystemContext.ControlSystemContext())
             {
                 return await context.Users
+                    .Include(item => item.Disease)
                     .ToListAsync();
             }
         }
@@ -98,7 +100,10 @@ namespace ControlSystem.DAL.User.Repositories
                 var user = await context.Users.FirstOrDefaultAsync(item => item.Id == id);
 
                 if (user != null)
+                {
                     context.Users.Remove(user);
+                    context.SaveChanges();
+                }
             }
         }
     }

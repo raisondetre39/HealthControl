@@ -6,12 +6,11 @@ namespace ControlSystem.DAL.Device.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public async Task<bool> IsUserExist(int id)
+        public async Task<Contracts.Entities.User> IsUserExist(int id)
         {
             using (var context = new ControlSystemContext.ControlSystemContext())
             {
-                var any = await context.Users.AnyAsync(s => s.Id == id);
-                return any;
+                return await context.Users.FirstOrDefaultAsync(s => s.Id == id);
             }
         }
     }
