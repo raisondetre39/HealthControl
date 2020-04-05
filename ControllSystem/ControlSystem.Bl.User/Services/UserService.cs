@@ -46,6 +46,7 @@ namespace ControlSystem.BL.User.Services
 
         public async Task<UpdateUserStatus> UpdateUser(Contracts.Entities.User user)
         {
+            user.Password = user.Password.GetCryptedString();
             return await _userRepository.UpdateAsync(user);
         }
 
