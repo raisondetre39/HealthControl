@@ -36,9 +36,9 @@ namespace ControlSystem.DAL.Device.Repositories
         {
             using (var context = new ControlSystemContext.ControlSystemContext())
             {
-                var isUserExists = await _userRepository.IsUserExist(entity.UserId);
+                var user = await _userRepository.IsUserExist(entity.UserId);
 
-                if (!isUserExists)
+                if (user == null)
                     return new CreateDeviceResult() { Status = CreateDeviceStatus.UserNotExists };
 
                 var isIndicatorsExists = await _indicatorRepository
@@ -48,6 +48,8 @@ namespace ControlSystem.DAL.Device.Repositories
                     return new CreateDeviceResult() { Status = CreateDeviceStatus.IndicatorNotExists };
 
                 await context.AddAsync(entity);
+                
+                context.Update(user);
                 await context.SaveChangesAsync();
 
                 return new CreateDeviceResult()

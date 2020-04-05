@@ -77,7 +77,7 @@ namespace ControlSystem.WebApi.User.AWS.Controllers
 
         [UserAuthorization]
         [HttpGet]
-        public async Task<IEnumerable<Contracts.Entities.User>> GetUsers(int id)
+        public async Task<IEnumerable<Contracts.Entities.User>> GetUsers()
         {
             return await _userService.GetUsers();
         }

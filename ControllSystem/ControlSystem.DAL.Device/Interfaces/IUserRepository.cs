@@ -4,6 +4,6 @@ namespace ControlSystem.DAL.Device.Interfaces
 {
     public interface IUserRepository
     {
-        Task<bool> IsUserExist(int id);
+        Task<Contracts.Entities.User> IsUserExist(int id);
     }
 }
