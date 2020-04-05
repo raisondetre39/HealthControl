@@ -8,11 +8,31 @@
       <span>Control</span>
     </mat-toolbar>
     <mat-nav-list>
-      <a class="text-deactive" mat-list-item [routerLink]="['/home']" routerLinkActive="active">Home</a>
-      <a class="text-deactive" mat-list-item [routerLink]="['/admin']" routerLinkActive="active" *ngIf="isAdmin">Create User</a>
+      <div *ngIf="userAuthenticated()">
+        <ul style="list-style: none;">
+          <li class="pl-4">
+            <img class="img-fluid-1" src="assets/images/icon-account.png">
+          </li>
+          <li>
+            <em class="text-deactive">
+              {{ userData?.firstName }} &nbsp; {{ userData?.lastName }}
+            </em>
+          </li>
+          <li>
+            <em class="text-deactive">
+              {{ getRole() }}
+            </em>
+          </li>
+        </ul>
+      </div>
+      <div class="pt-5">
+        <a class="text-deactive" mat-list-item [routerLink]="['/admin']" 
+        routerLinkActive="active" *ngIf="isAdmin">Create User</a>
+      </div>
+      
     </mat-nav-list>
   </mat-sidenav>
-  <mat-sidenav-content>
+  <mat-sidenav-content class="bg-div">
     <mat-toolbar class="bg-div">
       <mat-toolbar-row>
         <button

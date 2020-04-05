@@ -1,0 +1,16 @@
+.img-fluid-1 {
+    max-width: 30%;
+    height: auto;
+}
+
+.bg-table {
+    background: #2F3B52;
+}
+
+.borderless th {
+    border: none;
+}
+
+.borderless td {
+    border-color: #242E42 ;
+}

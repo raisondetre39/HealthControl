@@ -5,12 +5,17 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { CreateUserService } from './components/create-user/create-user.service';
-import { CreateDeviceComponent } from './components/create-device/create-device.component';
-import { CreateDeviceService } from './components/create-device/create-device.service';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import { UserListService } from './components/user-list/user-list.service';
 
 
 @NgModule({
-  declarations: [ CreateUserComponent, CreateDeviceComponent],
+  declarations: [
+    CreateUserComponent,
+    UserListComponent,
+    MainPageComponent,
+  ],
   imports: [
     CommonModule,
     AdminRoutingModule,
@@ -18,7 +23,7 @@ import { CreateDeviceService } from './components/create-device/create-device.se
   ],
   providers: [
     CreateUserService,
-    CreateDeviceService
+    UserListService,
   ]
 })
 export class AdminModule { }

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../authentication.service';
 import { first } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Role } from 'src/app/shared/extension/roles';
 
 
 @Component({

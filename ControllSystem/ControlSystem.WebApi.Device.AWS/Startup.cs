@@ -51,9 +51,10 @@ namespace ControlSystem.WebApi.Device.AWS
             app.UseMiddleware<GlobalExeptionHandler>();
             app.UseStaticFiles();
             app.UseSwaggerDocumentation();
-            app.UseCors(builder => builder.WithOrigins("https://localhost:4200")
-                   .AllowAnyHeader()
-                   .AllowAnyMethod());
+            app.UseCors(options =>
+                options.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
             app.UseMvc();
         }
     }

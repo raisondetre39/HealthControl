@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { IDiseaseInfo } from 'src/app/shared/interfaces/disease.interface';
 import { takeUntil } from 'rxjs/operators';
+import { IIndicatorInfo } from 'src/app/shared/interfaces/indicator.interface';
 
 @Component({
   selector: 'app-create-user',
@@ -16,6 +17,9 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   userForm: FormGroup;
   disease: IDiseaseInfo;
+  deviceForm: FormGroup;
+  indicator: IIndicatorInfo;
+  loading = false;
   private destroy$ = new Subject<void>();
   constructor(private createUserService: CreateUserService,
               private toastr: ToastrService,
@@ -24,6 +28,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getDiseases();
+    this.getIndicators();
     this.createForm();
   }
 
@@ -40,27 +45,65 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     );
   }
 
+  getIndicators(): void {
+    this.createUserService.getIndicators()
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(
+      res => {
+        this.indicator = res;
+      },
+      () => {
+        this.toastr.error(`Something is wrong`);
+      }
+    );
+  }
+
   onSubmit(): void {
-    if (this.userForm.valid) {
-      console.log(this.userForm.value);
-      this.createUserService.createUser(this.userForm.value)
-        .pipe(takeUntil(this.destroy$))
-        .subscribe(
-          (res: any) => {
-            this.toastr.success(`User created successefully`, `Success`);
-            this.goToCreateDevice(res.userId);
-          },
-          () => {
-            this.toastr.error(`Something else, exam not created`, `Error`);
-          }
-        );
+    if (this.userForm.valid && this.deviceForm.valid) {
+      this.loading = true;
+      this.postUser();
     } else {
       this.userForm.markAllAsTouched();
+      this.deviceForm.markAllAsTouched();
     }
   }
 
-  goToCreateDevice(userId: number): void {
-    this.router.navigate(['/admin/create-device', userId]);
+  postUser(): void {
+    this.createUserService.createUser(this.userForm.value)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        (res: any) => {
+          this.postIndicator(res.userId);
+        },
+        () => {
+          this.loading = false;
+          this.toastr.error(`Something else, exam not created`, `Error`);
+        }
+      );
+  }
+
+  postIndicator(createdId: number): void {
+    this.createUserService.createDievice({
+      userId: createdId,
+      ...this.deviceForm.value
+    })
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(
+        () => {
+          this.loading = false;
+          window.location.reload();
+          this.toastr.success(`User and Device created successefully`, `Success`);
+        },
+        () => {
+          this.loading = false;
+          this.deleteUser(createdId);
+          this.toastr.error(`Something wrong user not created`, `Error`);
+        }
+      );
+  }
+
+  deleteUser(userId: number) {
+    this.createUserService.deleteUser(userId);
   }
 
   createForm(): void  {
@@ -71,10 +114,17 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       lastName: [null, Validators.required],
       diseaseId: [null, Validators.required]
     });
+    this.deviceForm = this.formBuilder.group({
+      deviceName: [null,  Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(10)])],
+      indicatorIds: [null, Validators.required],
+    });
   }
 
   resetForm(): void {
-    this.userForm.reset();
+    if (!this.loading) {
+      this.userForm.reset();
+      this.deviceForm.reset();
+    }
   }
 
   hasCustomError = (form: FormGroup, control: string): boolean =>

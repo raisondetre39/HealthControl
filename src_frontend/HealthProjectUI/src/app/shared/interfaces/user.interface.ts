@@ -3,6 +3,7 @@ import { Role } from '../extension/roles';
 export interface IUser {
     token?: string;
     role: Role;
+    id: number;
 }
 
 export interface ICreateUser {
@@ -19,5 +20,55 @@ export interface IUserPartialInfo {
     lastName: string;
     diseaseName: string;
     diseaseId: number;
+    role: number;
+}
+
+export interface IUserInfo {
+    email: string;
+    firstName: string;
+    lastName: string;
+    password: string;
+    device: IDeviceInfo;
+    deviceId: number;
+    disease: IDisease;
+    diseaseId: number;
+    role: number;
+    id: number;
+}
+
+export interface IDisease {
+    diseaseName: string;
+    users: any;
+    id: number;
+}
+
+export interface IDeviceInfo {
+    deviceName: string;
+    userId: number;
+    deviceIndicators: IDeviceIndicator[];
+    id: number;
+}
+
+export interface IDeviceIndicator {
+    deviceId: number;
+    indicator: IIndicatorInfo;
+    indicatorId: number;
+    indicatorValues: IIndicatorValue[];
+    id: number;
+}
+
+export interface IIndicatorValue {
+    deviceIndicatorId: number;
+    value: number;
+    date: string;
+    id: number;
+}
+
+export interface IIndicatorInfo {
+    indicatorName: string;
+    maxValue: number;
+    minValue: number;
+    devices: [null];
+    id: number;
 }
 

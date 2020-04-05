@@ -48,14 +48,15 @@ namespace ControlSystem.WebApi.Auth.AWS
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseMiddleware<GlobalExeptionHandler>();
             app.UseStaticFiles();
             app.UseSwaggerDocumentation();
-            app.UseCors(builder => builder.WithOrigins("https://localhost:4200")
-                   .AllowAnyHeader()
-                   .AllowAnyMethod());
+            app.UseHttpsRedirection();
+            app.UseCors(options =>
+                options.WithOrigins("http://localhost:4200")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
             app.UseMvc();
         }
     }

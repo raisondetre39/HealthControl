@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { CreateUserComponent } from './components/create-user/create-user.component';
-import { CreateDeviceComponent } from './components/create-device/create-device.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'create-user', pathMatch: 'full'},
-  { path: 'create-user', component: CreateUserComponent},
-  { path: 'create-device/:id', component: CreateDeviceComponent},
+  { path: '', redirectTo: 'main', pathMatch: 'full'},
+  { path: 'main', component: MainPageComponent},
+
 ];
 
 @NgModule({
