@@ -25,11 +25,16 @@
           </li>
         </ul>
       </div>
-      <div class="pt-5">
+      <div class="pt-5" *ngIf="isAdmin">
         <a class="text-deactive" mat-list-item [routerLink]="['/admin']" 
-        routerLinkActive="active" *ngIf="isAdmin">Create User</a>
+        routerLinkActive="active">Create User</a>
       </div>
-      
+      <div class="pt-5" *ngIf="isUser">
+        <a class="text-deactive" mat-list-item [routerLink]="['/user/account']" 
+        routerLinkActive="active">Account</a>
+        <a class="text-deactive" mat-list-item [routerLink]="['/user/analytics']" 
+        routerLinkActive="active">Analytics</a>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="bg-div">

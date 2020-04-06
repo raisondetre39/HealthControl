@@ -23,8 +23,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   private destroy$ = new Subject<void>();
   constructor(private createUserService: CreateUserService,
               private toastr: ToastrService,
-              private formBuilder: FormBuilder,
-              private router: Router) { }
+              private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.getDiseases();
@@ -40,7 +39,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         this.disease = res;
       },
       () => {
-        this.toastr.error(`Something is wrong`);
+        this.toastr.error(`Something else`);
       }
     );
   }
@@ -53,7 +52,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         this.indicator = res;
       },
       () => {
-        this.toastr.error(`Something is wrong`);
+        this.toastr.error(`Something else`);
       }
     );
   }
@@ -77,7 +76,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         },
         () => {
           this.loading = false;
-          this.toastr.error(`Something else, exam not created`, `Error`);
+          this.toastr.error(`Something else`, `Error`);
         }
       );
   }
@@ -97,7 +96,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         () => {
           this.loading = false;
           this.deleteUser(createdId);
-          this.toastr.error(`Something wrong user not created`, `Error`);
+          this.toastr.error(`Something else`, `Error`);
         }
       );
   }

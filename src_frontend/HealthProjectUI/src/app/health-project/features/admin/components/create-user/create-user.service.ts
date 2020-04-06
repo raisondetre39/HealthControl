@@ -16,22 +16,22 @@ export class CreateUserService {
   constructor(private http: HttpClient) { }
 
   createUser(data): Observable<ICreateUser> {
-    return this.http.post<ICreateUser>(this.apiLink.userApi + `Users`, data);
+    return this.http.post<ICreateUser>(this.apiLink.userApi + 'Users', data);
   }
 
   getDisease(): Observable<IDiseaseInfo> {
-    return this.http.get<IDiseaseInfo>(this.apiLink.diseaseApi + `Diseases`);
+    return this.http.get<IDiseaseInfo>(this.apiLink.diseaseApi + 'Diseases');
   }
 
   createDievice(data): Observable<IDevice> {
-    return this.http.post<IDevice>(this.apiLink.dieviceApi + `Devices`, data);
+    return this.http.post<IDevice>(this.apiLink.deviceApi + 'Devices', data);
   }
 
   getIndicators(): Observable<IIndicatorInfo> {
-    return this.http.get<IIndicatorInfo>(this.apiLink.dieviceApi + `Indicators`);
+    return this.http.get<IIndicatorInfo>(this.apiLink.deviceApi + 'Indicators');
   }
 
   deleteUser(userId: number) {
-    return this.http.delete(this.apiLink.userApi + `Users/` + userId);
+    return this.http.delete(this.apiLink.userApi + 'Users/' + userId);
   }
 }

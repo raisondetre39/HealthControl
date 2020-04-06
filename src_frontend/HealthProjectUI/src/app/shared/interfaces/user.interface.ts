@@ -19,8 +19,10 @@ export interface IUserPartialInfo {
     firstName: string;
     lastName: string;
     diseaseName: string;
+    password: string;
     diseaseId: number;
     role: number;
+    id: number;
 }
 
 export interface IUserInfo {
@@ -40,6 +42,13 @@ export interface IDisease {
     diseaseName: string;
     users: any;
     id: number;
+}
+
+export interface IUpdateUser {
+    Email: string;
+    Password: string;
+    FirstName: string;
+    LastName: string;
 }
 
 export interface IDeviceInfo {
