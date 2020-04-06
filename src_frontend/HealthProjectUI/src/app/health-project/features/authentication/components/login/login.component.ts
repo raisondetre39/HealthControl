@@ -3,9 +3,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../../authentication.service';
-import { first } from 'rxjs/operators';
+import { first, takeUntil } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Role } from 'src/app/shared/extension/roles';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import { GreetingDialogComponent } from 'src/app/shared/components/greeting-dialog/greeting-dialog.component';
 
 
 @Component({
@@ -24,6 +26,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
   constructor(
+    public dialog: MatDialog,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -57,7 +60,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     .pipe(first())
     .subscribe(
         () => {
-          this.router.navigate(['/home']);
+          this.openDialogGreeting();
+
         },
         error => {
             this.error = error;
@@ -66,6 +70,15 @@ export class LoginComponent implements OnInit, OnDestroy {
     } else {
         this.loginForm.markAllAsTouched();
     }
+  }
+
+  openDialogGreeting(): void {
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.width = '400px';
+    const dialogRef = this.dialog.open(GreetingDialogComponent, matDialogConfig);
+    dialogRef.afterClosed()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => this.router.navigate(['/home']));
   }
 
   loggedIn() {

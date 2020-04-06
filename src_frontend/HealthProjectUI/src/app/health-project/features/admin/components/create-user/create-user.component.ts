@@ -102,7 +102,14 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   }
 
   deleteUser(userId: number) {
-    this.createUserService.deleteUser(userId);
+    this.createUserService.deleteUser(userId).subscribe(
+      () => {
+
+      },
+      () => {
+        this.toastr.error(`Something else, with creating user`, `Error`);
+      },
+    );
   }
 
   createForm(): void  {

@@ -1,10 +1,12 @@
 
   <div class="container" *ngIf="deviceIndicator!=null">
-    <div *ngFor="let element of deviceIndicator.deviceIndicators">
-        <button class="btn btn-primary" (click)="displayGrap(element.indicatorId)">
+    <ul class="list-inline" *ngFor="let element of deviceIndicator.deviceIndicators">
+        <li>
+          <button class="btn btn-primary" (click)="displayGrap(element.indicatorId)">
             Open indicator {{element.indicatorId}}
-        </button>
-    </div>
+          </button>
+        </li>
+    </ul>
     <div class="flex pt-5">
         <div class="flex-item">
           <div style="display: block;">

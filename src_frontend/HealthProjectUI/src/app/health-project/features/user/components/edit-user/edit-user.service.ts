@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ApiLink } from 'src/app/shared/extension/api-links';
+import { HttpClient } from '@angular/common/http';
+import { IUpdateUser, IUserPartialInfo, IDisease } from 'src/app/shared/interfaces/user.interface';
 import { Observable } from 'rxjs';
-import { IUserPartialInfo, IDisease } from 'src/app/shared/interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AccountService {
+export class EditUserService {
 
   private apiLink = ApiLink ;
   constructor(private http: HttpClient) { }
@@ -16,9 +16,8 @@ export class AccountService {
     return this.http.get<IUserPartialInfo>(this.apiLink.userApi + 'Users/' + userId);
   }
 
-  getDisease(diseaseId: number): Observable<IDisease> {
-    return this.http.get<IDisease>(this.apiLink.diseaseApi + 'Diseases/' + diseaseId);
+  updateUser(userId: number, data: IUpdateUser) {
+    return this.http.put<IUpdateUser>(this.apiLink.userApi + 'Users/' + userId, data);
   }
-
 
 }

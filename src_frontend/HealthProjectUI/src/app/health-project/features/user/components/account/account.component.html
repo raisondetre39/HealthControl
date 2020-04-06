@@ -1,16 +1,11 @@
-<div class="bg-div container w-100">
-    <div class="pt-1">
-        <form [formGroup]="userForm" autocomplete="off" novalidate (ngSubmit)="onSubmit()">
+<div class="bg-div container" *ngIf="userInfo">
+    <div class="pt-1 bg-div-1 m-3">
             <div class="row pt-3">
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>Name</mat-label>
-                            <input matInput formControlName="firstName" [readonly]="loading"
-                            [class.is-invalid]="hasCustomError(userForm, 'firstName')" />
-                            <mat-error *ngIf="hasCustomError(userForm, 'firstName')">
-                                First Name is required.
-                            </mat-error>
+                            <input matInput [(ngModel)]="userInfo.firstName" readonly>
                         </mat-form-field>
                     </div>
                 </div>
@@ -18,14 +13,7 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>Email</mat-label>
-                            <input matInput formControlName="email" [readonly]="loading"
-                            [class.is-invalid]="hasCustomError(userForm, 'email')" />
-                            <mat-error *ngIf="hasPatternError(userForm, 'email')">
-                                Invalid email address. Valid e-mail can contain only latin letters, numbers, '@' and '.'.
-                            </mat-error>
-                            <mat-error *ngIf="hasCustomError(userForm, 'email')">
-                                Email is required.
-                            </mat-error>
+                            <input matInput [(ngModel)]="userInfo.email" readonly>
                         </mat-form-field>
                     </div>
                 </div>
@@ -35,37 +23,24 @@
                     <div class="form-group">
                         <mat-form-field>
                             <mat-label>Last Name</mat-label>
-                            <input matInput formControlName="lastName" [readonly]="loading"
-                            [class.is-invalid]="hasCustomError(userForm, 'lastName')" />
-                            <mat-error *ngIf="hasCustomError(userForm, 'lastName')">
-                                Last Name is requireds.
-                            </mat-error>
+                            <input matInput [(ngModel)]="userInfo.lastName" readonly>
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" *ngIf="disease">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Password</mat-label>
-                            <input matInput type="password" formControlName="password" [readonly]="loading"
-                            [class.is-invalid]="hasCustomError(userForm, 'password')" />
-                            <mat-error *ngIf="hasCustomError(userForm, 'password')">
-                                Password is required.
-                            </mat-error>
+                            <mat-label>Disease</mat-label>
+                            <input matInput [(ngModel)]="disease" readonly>
                         </mat-form-field>
                     </div>
                 </div>
             </div>
-        </form>
-        <div class="form-group pt-3">
+        <div class="form-group text-left pb-3">
             <mat-button-toggle-group>
-                <button [disabled]="loading" mat-raised-button color="primary" class="btn-block" (click)="onSubmit()">
-                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Create
+                <button mat-raised-button color="primary" (click)="openDialog()">
+                    Edit profile
                 </button>
-                <mat-button-toggle (click)="resetForm()">
-                    <mat-icon>cached</mat-icon>
-                </mat-button-toggle>
             </mat-button-toggle-group>
         </div>
     </div>

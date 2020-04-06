@@ -7,10 +7,12 @@ import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './layouts/header/header.component';
 import { ConfirmDeleteUserDialogComponent } from './components/confirm-delete-user-dialog/confirm-delete-user-dialog.component';
 import { UserService } from './services/user.service';
+import { GreetingDialogService } from './components/greeting-dialog/greeting-dialog.service';
+import { GreetingDialogComponent } from './components/greeting-dialog/greeting-dialog.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, ConfirmDeleteUserDialogComponent],
+  declarations: [HeaderComponent, ConfirmDeleteUserDialogComponent, GreetingDialogComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -19,12 +21,14 @@ import { UserService } from './services/user.service';
     ToastrModule.forRoot(),
     MaterialModule,
   ],
+  entryComponents: [GreetingDialogComponent],
   exports: [
     CommonModule,
     ReactiveFormsModule,
     HeaderComponent,
     FormsModule,
     ConfirmDeleteUserDialogComponent,
+    GreetingDialogComponent,
     MaterialModule,
   ]
 })
@@ -32,7 +36,7 @@ export class SharedModule {
   static forRoot(): ModuleWithProviders<SharedModule> {
     return {
       ngModule: SharedModule,
-      providers: [UserService]
+      providers: [UserService, GreetingDialogService]
     };
   }
 }

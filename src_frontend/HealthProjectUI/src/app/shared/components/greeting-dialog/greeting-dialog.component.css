@@ -1,0 +1,20 @@
+.mat-form-field {
+    width: 100%;
+}
+
+.mat-button-toggle-group {
+    width: 100%;
+}
+
+.bg-div {
+    height: 100% !important;
+    background-color: #242E42 !important;
+}
+
+input, textarea {
+    caret-color: white;
+}
+
+.container {
+    max-width: 100%;
+}

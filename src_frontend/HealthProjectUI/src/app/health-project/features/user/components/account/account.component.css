@@ -8,50 +8,39 @@
 
 .bg-div {
     height: 100% !important;
-    background-color: #242E42 !important;
+    background-color: #2F3B52 !important;
 }
 
 input, textarea {
-    caret-color: white;
+    caret-color: #A2B3CD;
 }
 
 .container {
-    max-width: 100%;
+    max-width: 70%;
 }
 
 ::ng-deep input.mat-input-element {
-    color: white  !important;
+    color: #A2B3CD  !important;
 }
 
-::ng-deep .mat-focused input.mat-input-element {
-    color: #1F87EE  !important;
-}
-
-::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-    color:#1F87EE !important;
-}
-  
-::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
-    background-color:#1F87EE !important;
-}
-  
 ::ng-deep .mat-form-field-label {
-    color: white !important;
+    color: #A2B3CD !important;
 }
   
 ::ng-deep .mat-form-field-underline{
-    background-color:white !important;
-}
-  
-::ng-deep .mat-form-field.ng-dirty.ng-invalid .mat-form-field-label {
-    color: #EF4337 !important;
+    background-color:#A2B3CD !important;
 }
 
 ::ng-deep .mat-select-value {
-    color: white !important;
+    color: #A2B3CD !important;
 }
 
 ::ng-deep .mat-select-arrow {
-    color: white !important;
+    color: #A2B3CD !important;
+}
+
+::ng-deep .mat-dialog-container {
+    background-color: #242E42;
+    color: #039be5;
 }
   

@@ -1,11 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { AccountService } from './account.service';
-import { ToastrService } from 'ngx-toastr';
 import { takeUntil } from 'rxjs/operators';
 import { IUserPartialInfo, IUser } from 'src/app/shared/interfaces/user.interface';
 import { AuthenticationService } from '../../../authentication/authentication.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EditUserComponent } from '../edit-user/edit-user.component';
+import { GreetingDialogComponent } from 'src/app/shared/components/greeting-dialog/greeting-dialog.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-account',
@@ -14,20 +17,26 @@ import { AuthenticationService } from '../../../authentication/authentication.se
 })
 export class AccountComponent implements OnInit, OnDestroy {
 
-  userForm: FormGroup;
   userInfo: IUserPartialInfo;
-  loading = false;
+  disease: string;
   currentUser: IUser;
   private destroy$ = new Subject<void>();
   constructor(private accountService: AccountService,
-              private toastr: ToastrService,
-              private formBuilder: FormBuilder,
+              public dialog: MatDialog,
               private authenticationService: AuthenticationService) {
-                this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
-              }
+    this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
+
+
+  openDialog(): void {
+    const matDialogConfig = new MatDialogConfig();
+    matDialogConfig.backdropClass = 'backdropBackground';
+    matDialogConfig.width = '600px';
+    const dialogRef = this.dialog.open(EditUserComponent, matDialogConfig);
+    dialogRef.afterClosed();
+  }
 
   ngOnInit(): void {
-    this.createForm();
     this.getUserInfo();
   }
 
@@ -37,63 +46,20 @@ export class AccountComponent implements OnInit, OnDestroy {
       .subscribe(
         (res) => {
           this.userInfo = res;
-          this.initForm();
+          this.getDiseaseInfo(this.userInfo.diseaseId);
         }
       );
   }
 
-  initForm(): void {
-    this.userForm.get('email').setValue(this.userInfo.email);
-    this.userForm.get('password').setValue(this.userInfo.password);
-    this.userForm.get('firstName').setValue(this.userInfo.email);
-    this.userForm.get('lastName').setValue(this.userInfo.email);
-  }
-
-  createForm(): void  {
-    this.userForm = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, Validators.required],
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
-    });
-  }
-
-  onSubmit(): void {
-    if (this.userForm.valid) {
-      this.loading = true;
-      this.updateUser();
-    } else {
-      this.userForm.markAllAsTouched();
-    }
-  }
-
-  updateUser(): void {
-    this.accountService.updateUser(this.userInfo.id, this.userForm.value)
+  getDiseaseInfo(diseaseId: number) {
+    this.accountService.getDisease(diseaseId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
-        () => {
-          this.loading = false;
-          this.toastr.success(`Success`, `Success`);
-          window.location.reload();
-        },
-        () => {
-          this.loading = false;
-          this.toastr.error(`Something else`, `Error`);
+        (res) => {
+          this.disease = res.diseaseName;
         }
       );
   }
-
-  resetForm(): void {
-    if (!this.loading) {
-      this.userForm.reset();
-    }
-  }
-
-  hasCustomError = (form: FormGroup, control: string): boolean =>
-  form.get(`${control}`).invalid && (form.get(`${control}`).dirty || form.get(`${control}`).touched)
-
-  hasPatternError = (form: FormGroup, control: string): boolean =>
-    (form.get(`${control}`).invalid && form.get(`${control}`).dirty)
 
   ngOnDestroy(): void {
     this.destroy$.next();
