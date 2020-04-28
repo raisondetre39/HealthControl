@@ -6,6 +6,7 @@ import { Subject, BehaviorSubject } from 'rxjs';
 import { takeUntil, switchMap } from 'rxjs/operators';
 // tslint:disable-next-line:max-line-length
 import { ConfirmDeleteUserDialogComponent } from 'src/app/shared/components/confirm-delete-user-dialog/confirm-delete-user-dialog.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-list',
@@ -19,7 +20,8 @@ export class UserListComponent {
     switchMap(() =>  this.userListService.getUsers())
   );
   private destroy$ = new Subject<void>();
-  constructor(public dialog: MatDialog,
+  constructor(public translateService: TranslateService,
+              public dialog: MatDialog,
               private userListService: UserListService,
               public toastr: ToastrService) { }
 
@@ -28,12 +30,12 @@ export class UserListComponent {
     this.userListService.deleteUser(userId)
       .subscribe(
         () => {
-          this.toastr.success('Success');
+          this.toastr.error(this.translateService.instant('User-Deleted'), this.translateService.instant('Success'));
           this.userEmit$.next('');
           this.userdeleted = false;
         },
         () => {
-          this.toastr.error('Error');
+          this.toastr.error(this.translateService.instant('Something-Is-Wrong'), this.translateService.instant('Error'));
           this.userdeleted = false;
         }
       );

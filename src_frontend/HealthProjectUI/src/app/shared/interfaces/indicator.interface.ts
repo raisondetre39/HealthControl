@@ -6,7 +6,7 @@ export interface IIndicator {
 }
 
 export interface IIndicatorInfo {
-    indicators: IIndicator;
+    indicators: IIndicator[];
     count: number;
 }
 

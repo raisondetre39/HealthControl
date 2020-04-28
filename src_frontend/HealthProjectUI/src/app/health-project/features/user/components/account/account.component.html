@@ -4,7 +4,9 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Name</mat-label>
+                            <mat-label>
+                                {{ 'Name' | translate }}
+                            </mat-label>
                             <input matInput [(ngModel)]="userInfo.firstName" readonly>
                         </mat-form-field>
                     </div>
@@ -12,7 +14,9 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Email</mat-label>
+                            <mat-label>
+                                {{ 'Email' | translate }}
+                            </mat-label>
                             <input matInput [(ngModel)]="userInfo.email" readonly>
                         </mat-form-field>
                     </div>
@@ -22,7 +26,9 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Last Name</mat-label>
+                            <mat-label>
+                                {{ 'Last-Name' | translate }}
+                            </mat-label>
                             <input matInput [(ngModel)]="userInfo.lastName" readonly>
                         </mat-form-field>
                     </div>
@@ -30,7 +36,9 @@
                 <div class="col-md-6" *ngIf="disease">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Disease</mat-label>
+                            <mat-label>
+                                {{ 'Disease' | translate }}
+                            </mat-label>
                             <input matInput [(ngModel)]="disease" readonly>
                         </mat-form-field>
                     </div>
@@ -39,7 +47,7 @@
         <div class="form-group text-left pb-3">
             <mat-button-toggle-group>
                 <button mat-raised-button color="primary" (click)="openDialog()">
-                    Edit profile
+                    {{ 'Edit-Profile' | translate }}
                 </button>
             </mat-button-toggle-group>
         </div>

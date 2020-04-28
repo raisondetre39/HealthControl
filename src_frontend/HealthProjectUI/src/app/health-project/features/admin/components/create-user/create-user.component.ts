@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { IDiseaseInfo } from 'src/app/shared/interfaces/disease.interface';
 import { takeUntil } from 'rxjs/operators';
 import { IIndicatorInfo } from 'src/app/shared/interfaces/indicator.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-user',
@@ -21,7 +22,8 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   indicator: IIndicatorInfo;
   loading = false;
   private destroy$ = new Subject<void>();
-  constructor(private createUserService: CreateUserService,
+  constructor(public translateService: TranslateService,
+              private createUserService: CreateUserService,
               private toastr: ToastrService,
               private formBuilder: FormBuilder) { }
 
@@ -39,7 +41,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         this.disease = res;
       },
       () => {
-        this.toastr.error(`Something else`);
+        this.toastr.error(this.translateService.instant('Something-Is-Wrong'), this.translateService.instant('Error'));
       }
     );
   }
@@ -52,7 +54,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         this.indicator = res;
       },
       () => {
-        this.toastr.error(`Something else`);
+        this.toastr.error(this.translateService.instant('Something-Is-Wrong'), this.translateService.instant('Error'));
       }
     );
   }
@@ -76,7 +78,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         },
         () => {
           this.loading = false;
-          this.toastr.error(`Something else`, `Error`);
+          this.toastr.error(this.translateService.instant('Something-Is-Wrong'), this.translateService.instant('Error'));
         }
       );
   }
@@ -91,12 +93,12 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         () => {
           this.loading = false;
           window.location.reload();
-          this.toastr.success(`User and Device created successefully`, `Success`);
+          this.toastr.success(this.translateService.instant('User-And-Device-Created'), this.translateService.instant('Success'));
         },
         () => {
           this.loading = false;
           this.deleteUser(createdId);
-          this.toastr.error(`Something else`, `Error`);
+          this.toastr.error(this.translateService.instant('Something-Is-Wrong'), this.translateService.instant('Error'));
         }
       );
   }
@@ -107,7 +109,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
       },
       () => {
-        this.toastr.error(`Something else, with creating user`, `Error`);
+        this.toastr.error(this.translateService.instant('Something-Is-Wrong'), this.translateService.instant('Error'));
       },
     );
   }
@@ -121,7 +123,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       diseaseId: [null, Validators.required]
     });
     this.deviceForm = this.formBuilder.group({
-      deviceName: [null,  Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(10)])],
+      deviceName: [null,  Validators.maxLength(10)],
       indicatorIds: [null, Validators.required],
     });
   }

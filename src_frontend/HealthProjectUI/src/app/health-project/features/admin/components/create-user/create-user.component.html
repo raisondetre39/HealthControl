@@ -10,11 +10,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Name</mat-label>
+                            <mat-label>
+                                {{ 'Name' | translate }}
+                            </mat-label>
                             <input matInput formControlName="firstName" [readonly]="loading"
                             [class.is-invalid]="hasCustomError(userForm, 'firstName')" />
                             <mat-error *ngIf="hasCustomError(userForm, 'firstName')">
-                                First Name is required.
+                                {{ 'First-Name-Is-Required' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -22,14 +24,16 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Email</mat-label>
+                            <mat-label>
+                                {{ 'Email' | translate }}
+                            </mat-label>
                             <input matInput formControlName="email" [readonly]="loading"
                             [class.is-invalid]="hasCustomError(userForm, 'email')" />
                             <mat-error *ngIf="hasPatternError(userForm, 'email')">
-                                Invalid email address. Valid e-mail can contain only latin letters, numbers, '@' and '.'.
+                                {{ 'Invalid-Email-Address' | translate }}
                             </mat-error>
                             <mat-error *ngIf="hasCustomError(userForm, 'email')">
-                                Email is required.
+                                {{ 'Email-Is-Required' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -39,11 +43,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Last Name</mat-label>
+                            <mat-label>
+                                {{ 'Last-Name' | translate }}
+                            </mat-label>
                             <input matInput formControlName="lastName" [readonly]="loading"
                             [class.is-invalid]="hasCustomError(userForm, 'lastName')" />
                             <mat-error *ngIf="hasCustomError(userForm, 'lastName')">
-                                Last Name is requireds.
+                                {{ 'Last-Name-Is-Requireds' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -51,11 +57,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Password</mat-label>
+                            <mat-label>
+                                {{ 'Password' | translate }}
+                            </mat-label>
                             <input matInput type="password" formControlName="password" [readonly]="loading"
                             [class.is-invalid]="hasCustomError(userForm, 'password')" />
                             <mat-error *ngIf="hasCustomError(userForm, 'password')">
-                                Password is required.
+                                {{ 'Password-Is-Required.' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -63,9 +71,11 @@
             </div>
             <div class="form-group pt-3">
                 <mat-form-field>
-                    <mat-label>Select disease</mat-label>
+                    <mat-label>
+                        {{ 'Select-Disease' | translate }}
+                    </mat-label>
                     <mat-select formControlName="diseaseId">
-                        <mat-option [value]='null' [disabled]="loading">Select disease</mat-option>
+                        <mat-option [value]='null' [disabled]="loading">{{ 'Select-Disease' | translate }}</mat-option>
                         <ng-container *ngIf="disease!=null">
                             <mat-option *ngFor="let element of disease.diseases" [disabled]="loading"
                                 [value]="element.id">
@@ -74,7 +84,7 @@
                         </ng-container>
                     </mat-select>
                     <mat-error *ngIf="hasCustomError(userForm, 'diseaseId')">
-                        Please choose disease.
+                        {{ 'Please-Choose-Disease' | translate }}
                     </mat-error>
                 </mat-form-field>
             </div>
@@ -84,17 +94,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Device Name</mat-label>
+                            <mat-label>
+                                {{ 'Device-Name' | translate }}
+                            </mat-label>
                             <input matInput formControlName="deviceName" [readonly]="loading"
                             [class.is-invalid]="hasCustomError(deviceForm, 'deviceName')" />
                             <mat-error *ngIf="hasCustomError(deviceForm, 'deviceName')">
-                                Device Name is required.
-                            </mat-error>
-                            <mat-error *ngIf="hasPatternError(deviceForm, 'deviceName')">
-                                Device name can't contain less than 5 symbols
-                            </mat-error>
-                            <mat-error *ngIf="hasPatternError(deviceForm, 'deviceName')">
-                                Device name can't contain more than 10 symbols.
+                                {{ 'Device-Name-Is-Required' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -102,17 +108,19 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <mat-form-field>
-                            <mat-label>Indicators</mat-label>
+                            <mat-label>
+                                {{ 'Indicators' | translate }}
+                            </mat-label>
                             <mat-select formControlName="indicatorIds" multiple>
                                 <ng-container *ngIf="indicator!=null">
-                                <mat-option *ngFor="let element of indicator.indicators" [disabled]="loading" 
-                                [value]="element.id">
-                                    {{element.indicatorName}}
-                                </mat-option>
+                                    <mat-option *ngFor="let element of indicator.indicators" [disabled]="loading" 
+                                    [value]="element.id">
+                                        {{element.indicatorName}}
+                                    </mat-option>
                                 </ng-container>
                             </mat-select>
                             <mat-error *ngIf="hasCustomError(deviceForm, 'indicatorIds')">
-                                Please choose indicators.
+                                {{ 'Please-Choose-Indicators' | translate }}
                             </mat-error>
                         </mat-form-field>
                     </div>
@@ -123,7 +131,7 @@
             <mat-button-toggle-group>
                 <button [disabled]="loading" mat-raised-button color="primary" class="btn-block" (click)="onSubmit()">
                     <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                    Create
+                    {{ 'Create' | translate }}
                 </button>
                 <mat-button-toggle (click)="resetForm()">
                     <mat-icon>cached</mat-icon>

@@ -30,11 +30,9 @@ export class GreetingDialogComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (res) => {
-          console.log(res);
           this.userInfo = res;
         },
-        (err) => {
-          console.log(err);
+        () => {
         }
       );
   }

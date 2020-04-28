@@ -3,11 +3,22 @@
         <table class="table borderless text-center text-white">
             <thead>
                 <tr>
-                    <th class="align-middle font-weight-light"> Photo </th>
-                    <th class="align-middle font-weight-light"> Full Name </th>
-                    <th class="align-middle font-weight-light"> Email </th>
-                    <th class="align-middle font-weight-light"> Disease </th>
-                    <th class="align-middle font-weight-light"> Action </th>
+                    <th class="align-middle font-weight-light"> 
+                        {{ 'Photo' | translate }}
+                    </th>
+                    <th class="align-middle font-weight-light"> 
+                        {{ 'Full-Name ' | translate }}
+                    </th>
+                    <th class="align-middle font-weight-light"> 
+                        {{ 'Email' | translate }}
+                    </th>
+                    <th class="align-middle font-weight-light">
+                         
+                        {{ 'Disease' | translate }}
+                    </th>
+                    <th class="align-middle font-weight-light">
+                        {{ 'Action' | translate }}
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +38,7 @@
                     <td class="align-middle">
                         <button class="btn btn-danger btn-block btn-sm" (click)="openDeleteDialog(user.id)"
                          [disabled]='userdeleted'> 
-                            Delete
+                            {{ 'Delete' | translate }}
                         </button>
                     </td>
                 </tr>

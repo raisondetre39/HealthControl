@@ -83,3 +83,7 @@
 ::ng-deep .mat-form-field.ng-dirty.ng-invalid .mat-form-field-label {
   color: #EF4337 !important;
 }
+::ng-deep .mat-dialog-container {
+  background-color: #242E42;
+  color: #039be5;
+}

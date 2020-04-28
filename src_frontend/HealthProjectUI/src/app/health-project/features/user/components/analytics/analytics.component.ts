@@ -5,8 +5,11 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { AnalyticsService } from './analytics.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { IDeviceInfo, IIndicatorValue, IDeviceIndicator } from 'src/app/shared/interfaces/user.interface';
-import { IIndicatorList, IDotValue } from 'src/app/shared/interfaces/indicator.interface';
+import { IDeviceInfo, IIndicatorValue,
+  IDeviceIndicator, IUser, IUserPartialInfo } from 'src/app/shared/interfaces/user.interface';
+import { IIndicatorList, IDotValue, IIndicatorInfo } from 'src/app/shared/interfaces/indicator.interface';
+import { UserService } from 'src/app/shared/services/user.service';
+import { AuthenticationService } from '../../../authentication/authentication.service';
 
 @Component({
   selector: 'app-analytics',
@@ -16,6 +19,7 @@ import { IIndicatorList, IDotValue } from 'src/app/shared/interfaces/indicator.i
 export class AnalyticsComponent implements OnInit, OnDestroy {
 
   generateData: IIndicatorList[] = [];
+  indificators: IIndicatorInfo;
   firstCall = false;
   public lineChartData: ChartDataSets[] = [
     { data: [0], label: 'Noun' },
@@ -48,17 +52,33 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
   public lineChartType = 'line';
   public lineChartPlugins = [pluginAnnotations];
   deviceIndicator: IDeviceInfo;
+  currentUser: IUser;
+  fullUserInfo: IUserPartialInfo;
 
   @ViewChild(BaseChartDirective, { static: true }) chart: BaseChartDirective;
   private destroy$ = new Subject<void>();
-  constructor(private analyticsService: AnalyticsService) { }
+  constructor(private analyticsService: AnalyticsService,
+              private userService: UserService,
+              private authenticationService: AuthenticationService) {
+  this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+  }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.getIndicators();
+    this.getUserInfo();
+  }
+
+  getUserInfo(): void {
+    this.userService.getUser(this.currentUser.id)
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(res => {
+    this.fullUserInfo = res;
     this.getDeviceInfo();
+    });
   }
 
   getDeviceInfo() {
-    this.analyticsService.getDevice(3)
+    this.analyticsService.getDevice(this.fullUserInfo.deviceId)
       .pipe(takeUntil(this.destroy$))
       .subscribe(
         (res) => {
@@ -91,6 +111,7 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
 
   displayGrap(indicatorId: number): void {
     this.firstCall = true;
+    this.displayOn(indicatorId);
     this.getLineChartData(indicatorId);
     this.getlineChartLabels(indicatorId);
   }
@@ -102,6 +123,11 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
     this.lineChartData = [{ data: dataX, label: 'Fddasd'}];
   }
 
+  getActiveIndicatorName(): string {
+    const name = this.getIndicatorName(this.generateData.find(x => x.display === true)?.id);
+    return name;
+  }
+
   getlineChartLabels(indicatorId: number) {
     const dataY: Label[] = [];
     this.generateData.find(x => x.id === indicatorId)
@@ -109,9 +135,29 @@ export class AnalyticsComponent implements OnInit, OnDestroy {
     this.lineChartLabels = dataY;
   }
 
+  displayOn(indicatorId: number) {
+    this.generateData.forEach(x => x.display = false);
+    this.generateData.find(x => x.id === indicatorId).display = true;
+  }
+
+  getIndicators(): void {
+    this.analyticsService.getIndicators()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(data => this.indificators = data);
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
   }
+
+  getIndicatorName(indicatorId: number): string {
+    if (indicatorId !== null && indicatorId !== undefined) {
+      const val = this.indificators.indicators.find(x => x.id === indicatorId).indicatorName;
+      return val;
+    }
+    return '';
+  }
+
 
 }

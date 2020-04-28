@@ -9,6 +9,7 @@ import { ConfirmDeleteUserDialogComponent } from './components/confirm-delete-us
 import { UserService } from './services/user.service';
 import { GreetingDialogService } from './components/greeting-dialog/greeting-dialog.service';
 import { GreetingDialogComponent } from './components/greeting-dialog/greeting-dialog.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { GreetingDialogComponent } from './components/greeting-dialog/greeting-d
     RouterModule,
     ToastrModule.forRoot(),
     MaterialModule,
+    TranslateModule
   ],
   entryComponents: [GreetingDialogComponent],
   exports: [
@@ -30,6 +32,7 @@ import { GreetingDialogComponent } from './components/greeting-dialog/greeting-d
     ConfirmDeleteUserDialogComponent,
     GreetingDialogComponent,
     MaterialModule,
+    TranslateModule
   ]
 })
 export class SharedModule {

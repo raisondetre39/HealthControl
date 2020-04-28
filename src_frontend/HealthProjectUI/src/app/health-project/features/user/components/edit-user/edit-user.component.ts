@@ -6,6 +6,7 @@ import { EditUserService } from './edit-user.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../../../authentication/authentication.service';
 import { takeUntil } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-user',
@@ -19,7 +20,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
   loading = false;
   currentUser: IUser;
   private destroy$ = new Subject<void>();
-  constructor(private editUserService: EditUserService,
+  constructor(public translateService: TranslateService,
+              private editUserService: EditUserService,
               private toastr: ToastrService,
               private formBuilder: FormBuilder,
               private authenticationService: AuthenticationService) {
@@ -72,12 +74,12 @@ export class EditUserComponent implements OnInit, OnDestroy {
       .subscribe(
         () => {
           this.loading = false;
-          this.toastr.success(`Success`, `Success`);
+          this.toastr.success(this.translateService.instant('User-Updated'), this.translateService.instant('Success'));
           window.location.reload();
         },
         () => {
           this.loading = false;
-          this.toastr.error(`Something else`, `Error`);
+          this.toastr.error(this.translateService.instant('Something-Is-Wrong'), this.translateService.instant('Error'));
         }
       );
   }

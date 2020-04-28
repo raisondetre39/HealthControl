@@ -8,18 +8,18 @@
     <div class="pt-1" *ngIf="userInfo">
         <div>
             <em>
-                Hello, {{userInfo.firstName}} &nbsp; {{userInfo.lastName}}
+                {{ 'Hello' | translate }}, {{userInfo.firstName}}
+                 &nbsp; {{userInfo.lastName}}
             </em>
             <p>
                 <em>
-                    You are logged in to your account.
-                    Click "OK" to start the application
+                    {{ 'You-Are-Logged' | translate }}
                 </em>
             </p>
         </div>
         <div class="form-group pt-3 text-right">
             <button mat-raised-button mat-dialog-close>
-                OK
+                {{ 'OK' | translate }}
             </button>
         </div>
     </div>

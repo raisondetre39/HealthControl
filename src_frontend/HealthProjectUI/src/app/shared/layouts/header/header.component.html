@@ -4,8 +4,10 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar class="text-white">          
-      <span class="font-weight-bold">Health</span>
-      <span>Control</span>
+      <span class="font-weight-bold">{{ 'Health' | translate }}</span>
+      <span>
+        {{ 'Control' | translate }}
+      </span>
     </mat-toolbar>
     <mat-nav-list>
       <div *ngIf="userAuthenticated()">
@@ -27,13 +29,19 @@
       </div>
       <div class="pt-5" *ngIf="isAdmin">
         <a class="text-deactive" mat-list-item [routerLink]="['/admin']" 
-        routerLinkActive="active">Create User</a>
+        routerLinkActive="active">
+          {{ 'Create-User' | translate }}
+        </a>
       </div>
       <div class="pt-5" *ngIf="isUser">
         <a class="text-deactive" mat-list-item [routerLink]="['/user/account']" 
-        routerLinkActive="active">Account</a>
+        routerLinkActive="active">
+          {{ 'Account' | translate }}
+        </a>
         <a class="text-deactive" mat-list-item [routerLink]="['/user/analytics']" 
-        routerLinkActive="active">Analytics</a>
+        routerLinkActive="active"> 
+          {{ 'Analytics' | translate }}
+        </a>
       </div>
     </mat-nav-list>
   </mat-sidenav>
@@ -50,7 +58,7 @@
       </button>
         <span class="example-spacer"></span>
       <button mat-raised-button (click)="logout()" *ngIf="userAuthenticated()">
-        Logout
+        {{ 'Logout' | translate }}
         <mat-icon>exit_to_app</mat-icon>
       </button>
       </mat-toolbar-row>

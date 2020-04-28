@@ -18,6 +18,7 @@ export interface IUserPartialInfo {
     email: string;
     firstName: string;
     lastName: string;
+    deviceId: number;
     diseaseName: string;
     password: string;
     diseaseId: number;
